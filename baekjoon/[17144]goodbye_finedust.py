@@ -1,6 +1,44 @@
+import copy
+
 def print_area(a):
     for l in a:
         print(l)
+
+def upper_shift(a, idx1):
+    for r in reversed(range(idx1-1)):
+        a[r+1][0]=a[r][0]
+    for i in range(1,len(a[0])):
+        a[0][i-1]=a[0][i]
+    for r in range(idx1):
+        max_c = len(a[0])-1
+        a[r][max_c] = a[r+1][max_c]
+    for i in range(2,len(a[0])):
+        a[idx1][i]=a[idx1][i-1]
+    a[idx1][1]=0
+    
+def lower_shift(a, idx2):
+    max_r = len(a) -1 
+    max_c = len(a[0])-1
+    for r in range(idx2+1, max_r):
+        a[r][0] = a[r+1][0]    
+
+    for i in range(0,max_c):
+        a[max_r][i]=a[max_r][i+1]
+
+    for r in reversed(range(idx2,max_r)):
+        a[r+1][max_c]=a[r][max_c]
+        
+    for i in range(1,max_c):
+        a[idx2][i+1]=a[idx2][i]
+    a[idx2][1]=0           
+
+
+def aircleaner(a, lo_idx):
+    upper_shift(a, lo_idx)
+    lower_shift(a, lo_idx+1)
+
+def finedust_spreads(a, r, c, acidx1, acidx2):
+    pass
 
 if __name__=="__main__":
     r, c, t = map(int, input().split())
@@ -8,8 +46,8 @@ if __name__=="__main__":
     result = list()
     for i in range(r):
         area.append(list(map(int, input().split())))
-        result.append([0 for x in range(c)])
 
+    result = copy.deepcopy(area)
     acidx1 = -1
     acidx2 = -1
     #result = list(area)
@@ -37,15 +75,17 @@ if __name__=="__main__":
                 count -= 1
             elif i<r-1:
                 if not (area[i+1][j]==-1):
-                    result[i+1][j] = area[i+1][j] + spread
-                    #1.
+                    result[i+1][j] = result[i+1][j] + spread
+                    #1. south
+                    print("[1] RESULT")
                     print_area(result)
             if not i:
                 count -= 1
             else:
                 if not (area[i-1][j]==-1):
-                    result[i-1][j]= area[i-1][j] + spread
-                    #2.
+                    result[i-1][j]= result[i-1][j] + spread
+                    #2. north
+                    print("[2] RESULT")
                     print_area(result)
                 
             # last col
@@ -59,16 +99,18 @@ if __name__=="__main__":
                     else:
                         if i<r-1:
                             print("debug")
-                            result[i+1][j] = area[i+1][j] + spread
+                            result[i+1][j] = result[i+1][j] + spread
                             #3.
+                            print("[3] RESULT")
                             print_area(result)
                         
                     if i==acidx2-1:
                         count-=1
                     else:
                         if i>0:
-                            result[i-1][j] = area[i-1][j] + spread
+                            result[i-1][j] = result[i-1][j] + spread
                             #4.
+                            print("[4] RESULT")
                             print_area(result)
                         
 
@@ -76,25 +118,29 @@ if __name__=="__main__":
                     if i==acidx1 or i==acidx2:
                         count-=1
                     else:
-                        result[i][j-1] = area[i][j-1] + spread
+                        result[i][j-1] = result[i][j-1] + spread
                         #5.
+                        print("[5] RESULT")
                         print_area(result)
                 
-                result[i][j+1] = area[i][j+1] + spread
+                result[i][j+1] = result[i][j+1] + spread
 
 
                 
             print(f"area[{i}][{j}] = {area[i][j]}\nspread = {spread}\ncount = {count}")
             print_area(result)
-            result[i][j] = area[i][j] - spread*count
+            result[i][j] = result[i][j] - spread*count
             print(f"area[{i}][{j}] = {area[i][j]}\n")
 
     print(f"+++ INPUT +++")
     print_area(area)
+            
+    print(f"+++ BEFORE calling aircleaner  +++")
+    print_area(result)
+    aircleaner(result, acidx1)
+    
+
     print(f"+++ RESULT +++")
     print_area(result)
-    # air cleaner works
 
-
-#    print(area)
 
