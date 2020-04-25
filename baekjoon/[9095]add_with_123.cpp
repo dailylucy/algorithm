@@ -1,3 +1,8 @@
+// 수정중(정답은 나오는 코드임)
+
+// 알고리즘 문제 url
+// https://www.acmicpc.net/problem/9095
+
 #include <algorithm>  
 #include <string>  
 #include <iostream>  
