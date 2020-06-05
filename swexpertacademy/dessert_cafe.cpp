@@ -36,6 +36,8 @@ void dfs(int a[20][20], int n, int predir, int dirCnt, int sr, int sc, int cr, i
 	if (cr - 1 >= 0) {
 		// 범위 내 && ( 바로전이 start가 아니면서 다음이 start || 방문한 적 없음 )
 		if (cc - 1 >= 0 && ((cnt != 2 && cr-1==sr && cc-1==sc) || !dVisited[a[cr-1][cc-1]])) {
+			// 사각형을 그려야 함 -> 방향이 3번 변경되어야 함. 
+			// 처음 dirCnt가 0임을 고려 -> 방향 4번 초과하여 변경시 사각형 모양이 아님.
 			if (predir != 1) { dirCnt++; }
 			if (dirCnt <= 4) 
 				dfs(a, n, 1, dirCnt, sr, sc, cr - 1, cc - 1, cnt, dVisited);
