@@ -1,6 +1,8 @@
 // 촌수 계산
 // https://www.acmicpc.net/problem/2644
 // C++ 14
+// 1984KB - 0ms
+
 
 #include <iostream>
 #include <vector>
