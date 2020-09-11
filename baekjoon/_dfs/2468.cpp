@@ -1,7 +1,7 @@
 // 안전 영역
 // https://www.acmicpc.net/problem/2468
 // C++ 14
-// 2060KB	- 20ms
+// 2060KB - 20ms
 
 #include <iostream>
 #include <vector>
