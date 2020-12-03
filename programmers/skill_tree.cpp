@@ -2,6 +2,9 @@
 // 스킬트리
 // https://programmers.co.kr/learn/courses/30/lessons/49993#
  
+// (A) 마지막에 해결한 부분 - 해결할 때 쓴 반례
+//  skill = "XDC";  user_skill = ["CEZYX"];
+ 
 
 #include <string>
 #include <vector>
@@ -20,7 +23,7 @@ int solution(string skill, vector<string> skill_trees) {
              if ( nowTreeIdx > -1 && prevTreeIdx > nowTreeIdx ) break;
              // 이전 스킬이 없는데 지금 스킬이 있는 경우
              if( nowTreeIdx > -1 && prevTreeIdx == -1) break;
-             if( sIdx == skill.size()-1 /*|| prevTreeIdx == user_skill.size()-1*/){
+             if( sIdx == skill.size()-1 /* (A) 마지막에 해결한 부분 || prevTreeIdx == user_skill.size()-1*/){ 
                  answer++;
                  break;
              } 
@@ -30,3 +33,5 @@ int solution(string skill, vector<string> skill_trees) {
     }
     return answer;
 }
+
+
